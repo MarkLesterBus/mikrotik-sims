@@ -24,15 +24,19 @@ use RouterOS\Query;
 |
 */
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::get('/me', [AuthController::class, 'me']);
+// });
 // Route::middleware('auth:sanctum')->group(function () {
 // });
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::resource('/users', UserController::class);
 Route::resource('/routers', RouterController::class);
 Route::resource('/bridges', BridgeController::class);

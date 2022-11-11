@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
         $this->configureRateLimiting();
@@ -49,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
+
     /**
      * Configure the rate limiters for the application.
      *
@@ -60,4 +62,6 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
+    // After that update the boot function.
+
 }
