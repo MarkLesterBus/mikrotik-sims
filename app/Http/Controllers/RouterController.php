@@ -54,9 +54,9 @@ class RouterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Router $router)
     {
-        //
+        return $router;
     }
 
     /**
@@ -77,9 +77,15 @@ class RouterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Router $router)
     {
-        //
+        $router->name = $request->name;
+        $router->host = $request->host;
+        $router->user = $request->user;
+        $router->pass = $request->pass;
+        $router->port = $request->port;
+        $router->save();
+        return $router;
     }
 
     /**
@@ -88,8 +94,9 @@ class RouterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Router $router)
     {
-        //
+        $router->delete();
+        return $router;
     }
 }

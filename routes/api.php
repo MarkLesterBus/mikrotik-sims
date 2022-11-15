@@ -41,25 +41,26 @@ Route::resource('/users', UserController::class);
 Route::resource('/routers', RouterController::class);
 Route::resource('/bridges', BridgeController::class);
 Route::resource('/profile', ProfileController::class);
+Route::resource('/devices', DeviceController::class);
 
-Route::group(['prefix' => '/devices'], function () {
-    Route::get('/{uuid}', [DeviceController::class, 'index']);
-    Route::get('/{uuid}/logs', [DeviceController::class, 'logs']);
+// Route::group(['prefix' => '/devices'], function () {
+//     Route::get('/{uuid}', [DeviceController::class, 'index']);
+//     Route::get('/{uuid}/logs', [DeviceController::class, 'logs']);
 
-    Route::get('/{uuid}/system/clock', [DeviceController::class, 'clock']);
-    Route::get('/{uuid}/system/resource/', [DeviceController::class, 'resource']);
+//     Route::get('/{uuid}/system/clock', [DeviceController::class, 'clock']);
+//     Route::get('/{uuid}/system/resource/', [DeviceController::class, 'resource']);
 
-    Route::get('/{uuid}/interface', [DeviceController::class, 'interfaces']);
-    Route::get('/{uuid}/interface/traffic/{interface}', [DeviceController::class, 'traffic']);
+//     Route::get('/{uuid}/interface', [DeviceController::class, 'interfaces']);
+//     Route::get('/{uuid}/interface/traffic/{interface}', [DeviceController::class, 'traffic']);
 
-    Route::get('/{uuid}/ip/hotspot', [DeviceController::class, 'servers']);
-    Route::get('/{uuid}/ip/hotspot/profiles', [DeviceController::class, 'server_profiles']);
-    Route::get('/{uuid}/ip/dhcp', [DeviceController::class, 'dhcp']);
-    Route::get('/{uuid}/ip/pool', [DeviceController::class, 'pool']);
-    Route::get('/{uuid}/ip/addresses', [DeviceController::class, 'addresses']);
-    Route::get('/{uuid}/ip/queue/simple', [DeviceController::class, 'queue_simple']);
-    Route::get('/{uuid}/ip/queue/tree', [DeviceController::class, 'queue_tree']);
-});
+//     Route::get('/{uuid}/ip/hotspot', [DeviceController::class, 'servers']);
+//     Route::get('/{uuid}/ip/hotspot/profiles', [DeviceController::class, 'server_profiles']);
+//     Route::get('/{uuid}/ip/dhcp', [DeviceController::class, 'dhcp']);
+//     Route::get('/{uuid}/ip/pool', [DeviceController::class, 'pool']);
+//     Route::get('/{uuid}/ip/addresses', [DeviceController::class, 'addresses']);
+//     Route::get('/{uuid}/ip/queue/simple', [DeviceController::class, 'queue_simple']);
+//     Route::get('/{uuid}/ip/queue/tree', [DeviceController::class, 'queue_tree']);
+// });
 // Route::group(['prefix'=>'/bridges'],function(){
 
 //     Route::get('/', function(Router $router) {
