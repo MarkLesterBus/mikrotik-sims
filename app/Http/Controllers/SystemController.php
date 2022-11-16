@@ -7,7 +7,7 @@ use App\Models\Router;
 use RouterOS\Client;
 use RouterOS\Query;
 
-class DeviceController extends Controller
+class SystemController extends Controller
 {
 
 
