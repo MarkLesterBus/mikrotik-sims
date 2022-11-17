@@ -17,33 +17,99 @@ class SystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     //DEVICE IDENTITY
-    public function index($uuid)
+    public function resources($uuid)
     {
         $device = Router::where('uuid', $uuid)->first();
         $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
-        $query = new Query('/system/identity/print');
-        $device = $client->query($query)->read();
-        return response()->json($device, 200);
-    }
-    //DEVICE RESOURCE
-    public function resource($uuid)
-    {
-        $device = Router::where('uuid', $uuid)->first();
-        $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+
         $query = new Query('/system/resource/print');
         $resource = $client->query($query)->read();
-        return response()->json($resource, 200);
-    }
-    //DEVICE CLOCK
-    public function clock($uuid)
-    {
-        $device = Router::where('uuid', $uuid)->first();
-        $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+
         $query = new Query('/system/clock/print');
         $clock = $client->query($query)->read();
 
-        return response()->json($clock, 200);
+        $resources = [
+            'resource' => $resource[0],
+            'clock' => $clock[0],
+        ];
+
+        // $query = new Query('/user/print');
+        // $users = $client->query($query)->read();
+        return response()->json($resources, 200);
     }
+    public function system($uuid)
+    {
+        $device = Router::where('uuid', $uuid)->first();
+        $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+
+        $query = new Query('/system/identity/print');
+        $identity = $client->query($query)->read();
+
+        $query = new Query('/system/history/print');
+        $history = $client->query($query)->read();
+
+        $query = new Query('/system/scheduler/print');
+        $scheduler = $client->query($query)->read();
+
+        $system = [
+            'identity' => $identity[0],
+            'history' => $history,
+            'scheduler' => $scheduler,
+        ];
+
+        // $query = new Query('/user/print');
+        // $users = $client->query($query)->read();
+        return response()->json($system, 200);
+    }
+    //DEVICE RESOURCE
+    // public function resource($uuid)
+    // {
+    //     $device = Router::where('uuid', $uuid)->first();
+    //     $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+    //     $query = new Query('/system/resource/print');
+    //     $resource = $client->query($query)->read();
+    //     return response()->json($resource, 200);
+    // }
+    // //DEVICE CLOCK
+    // public function clock($uuid)
+    // {
+    //     $device = Router::where('uuid', $uuid)->first();
+    //     $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+    //     $query = new Query('/system/clock/print');
+    //     $clock = $client->query($query)->read();
+
+    //     return response()->json($clock, 200);
+    // }
+    // public function history($uuid)
+    // {
+    //     $device = Router::where('uuid', $uuid)->first();
+    //     $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+    //     $query = new Query('/system/history/print');
+    //     $history = $client->query($query)->read();
+
+    //     return response()->json($history, 200);
+    // }
+    // public function scheduler($uuid)
+    // {
+    //     $device = Router::where('uuid', $uuid)->first();
+    //     $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+    //     $query = new Query('/system/scheduler/print');
+    //     $scheduler = $client->query($query)->read();
+
+    //     return response()->json($scheduler, 200);
+    // }
+    // public function users($uuid)
+    // {
+    //     $device = Router::where('uuid', $uuid)->first();
+    //     $client = new Client(['host' => $device->host, 'user' => $device->user, 'pass' => $device->pass, 'port' => (int)$device->port]);
+    //     $query = new Query('/user/print');
+    //     $users = $client->query($query)->read();
+
+    //     return response()->json($users, 200);
+    // }
+
+
+
     //INTERFACES
     public function interfaces($uuid)
     {
